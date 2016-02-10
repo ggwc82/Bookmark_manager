@@ -6,7 +6,12 @@
 
 <% if @last_link  %>
 
-  <p>Link added to www.google.com</p>
+  <p>Link added to <%= @last_link%> </p>
 
 <% end %>
+
+<form action='/links' method='get'>
+  <input type='submit' value='Display Links'>
+</form>
+
 
