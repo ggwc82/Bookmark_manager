@@ -60,3 +60,9 @@ Messages/methods:
 - view list of bookmarks
 - filter by tags
 ***********
+
+Authors
+------
+- Marco Bagnasco
+- Barry Grubb
+Bjoern Wagner
