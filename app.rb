@@ -6,10 +6,13 @@ class BookmarkManager < Sinatra::Base
     erb(:index)
   end
 
-  post '/' do 
-    @last_link = params['URL'] 
-    Link.create(url: params['URL'], title: params['Title'])
-    erb :index
+  post '/links' do
+    Link.create(url: params['URL'], title: params['Title'])  
+    redirect '/links'
+  end
+  
+  get '/links/new' do 
+       erb :new
   end
 
   get '/links' do

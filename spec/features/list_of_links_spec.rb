@@ -4,30 +4,36 @@
 
 require "spec_helper"
 
-feature "display a list of links" do
+feature "Bookmark Manager:" do
   
   before do
     visit("/")
-    fill_in("Title", :with => "Google")
-    fill_in("URL", :with => "www.google.com")
-    click_button("Add Link")
+    
   end
 
-  after do 
+  after(:all) do 
     Link.last.destroy  
   end
-
-  scenario "when one visits the homepage" do
-
-    expect(page).to have_content "Link added to www.google.com"
+  
+  scenario "User can choose to display or add links" do
+    expect(page).to have_selector(:button, count: 2)
+  end
+  
+  scenario "User can add a new link" do
+    click_button("Add Link")
+    fill_in("Title", :with => "Google")
+    fill_in("URL", :with => "www.google.com")
+    click_button("Add")  
+    expect(page).to have_content "Google - www.google.com"
   end
 
-  scenario "when one clicks on display links" do
 
-    click_button('Display Links')
-      Link.all
-     expect(page).to have_content "Google - www.google.com"
+   scenario "User can see a list of stored links" do
+    
+    click_button('Display Links')  
+    expect(page).to have_content "Google - www.google.com"
   end
+
 
 end
 
