@@ -1,6 +1,5 @@
 <h1> Links </h1>
 
 <% @links.each do |link| %> 
-  <p>  <%= link.title %> - <%= link.url %> </p>
-
+        <p>  <%= link.title %> - <%= link.url %> -  <%= link.tags.map(&:tag).join  %> </p>
 <% end %>

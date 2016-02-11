@@ -12,7 +12,6 @@ feature "Bookmark Manager:" do
   scenario "User can add a new link" do
     fill_form
     expect(page).to have_content "Google - www.google.com"
-
   end
 
 
@@ -21,6 +20,14 @@ feature "Bookmark Manager:" do
     expect(page).to have_content "Google - www.google.com"
   end
 
-
+  scenario "User can add a tag to stored links" do
+    visit('/')
+    click_button "Add Link"
+    fill_in :Title, with: "Google"
+    fill_in :URL, with: "www.google.com"
+    fill_in :Tag, with: "Search"
+    click_button "Add"
+    expect(page).to have_content "Google - www.google.com - Search"
+  end
 end
 
