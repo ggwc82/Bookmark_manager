@@ -8,7 +8,7 @@ class Link
   property :id, Serial
 end
 
-DataMapper.setup(:default, 'postgres://localhost/bookmark_manager')
+DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{ENV['RACK_ENV']}")
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.finalize
 DataMapper.auto_upgrade!
