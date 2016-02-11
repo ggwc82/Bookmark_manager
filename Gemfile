@@ -5,6 +5,7 @@ group :test do
 gem "rspec"
 gem "capybara"
 gem "rspec-sinatra"
+gem "database_cleaner"
 end
 
 gem "data_mapper"
