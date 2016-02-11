@@ -9,11 +9,13 @@ end
 
 describe 'creating links' do
   it 'adds a new link with site address and title' do
-    visit('/')
-    click_link('Add Bookmark')
-    fill_in 'title', with: 'BBC News'
-    fill_in 'url', with: 'http://news.bbc.co.uk'
-    click_button 'Submit'
+    visit_and_add
     expect(page).to have_content('BBC News')
    end
  end
+describe 'adding tags' do
+  it 'adds a single tag to a link'do
+  visit_and_add_tag
+  expect(page).to have_content('Tags: news')
+  end
+end
