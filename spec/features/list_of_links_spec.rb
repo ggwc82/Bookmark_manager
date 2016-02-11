@@ -2,8 +2,6 @@
 # So that I can quickly go to web sites I regularly visit
 # I would like to see a list of links on the homepage
 
-require "spec_helper"
-
 feature "Bookmark Manager:" do
   
   scenario "User can choose to display or add links" do
