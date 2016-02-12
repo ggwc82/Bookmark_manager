@@ -1,4 +1,3 @@
-require 'data_mapper'
 
 class Link
   include DataMapper::Resource
@@ -11,4 +10,3 @@ class Link
 end
 
 
-#DataMapper::Logger.new($stdout, :debug)

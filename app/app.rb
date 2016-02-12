@@ -1,44 +1,37 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
-require_relative 'models/link'
-require_relative 'models/tag'
-require_relative 'models/data_mapper_setup'
-# require 'data_mapper'
-# require 'dm-postgres-adapter'
+require_relative 'data_mapper_setup'
 
 class Bookmark < Sinatra::Base
+
   get '/' do
+    redirect '/links'
+  end
+
+  get '/links' do
     @links = Link.all
-    erb(:links)
+    erb(:'links/index')
   end
 
   get '/links/new' do
-    erb(:new_link)
+    erb(:'/links/new')
   end
 
   post '/links' do
-    link = Link.create(title: params[:title], url: params[:url])
-    tag = Tag.create(tag: params[:tag])
+    link = Link.new(title: params[:title], url: params[:url])
+    tag = Tag.create(name: params[:tags])
     link.tags << tag
     link.save
-    redirect '/'
+    redirect '/links'
   end
 
-  get '/tags/bubbles' do
-   @links = Link.all 
-    erb(:bubbles)
+  get '/tags/:name' do
+   tag = Tag.first(name: params[:name])
+  @links = tag ? tag.links : [] 
+    erb(:'links/index')
   end
 
-  #get '/tags' do
-    #erb(:tags)
-  #end
-
- #post '/tags'do
-
-
-    #Link.get()
- #end
 
  #start the server if ruby file executed directly
   run! if app_file == $0
