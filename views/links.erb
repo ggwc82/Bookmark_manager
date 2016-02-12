@@ -1,6 +1,7 @@
 <h1> Links </h1>
 
 <% @links.each do |link| %> 
-  <p>  <%= link.title %> - <%= link.url %> -  <%= link.tags.map(&:tag).join  %> </p>
-  <button id="<%= link.title %>">add tag</button>
+  <p>  <%= link.title %> - <%= link.url %> -  <%= link.tags.map(&:tag).join(', ')  %> </p>
+  <form action='/<%=link.title%>/update'> 
+          <button id="<%= link.title %>" type='submit'>add tag</button></form>
 <% end %>

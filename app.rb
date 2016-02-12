@@ -3,6 +3,8 @@ require 'sinatra/base'
 require './data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
+  enable :sessions
+
   get '/' do
     erb(:index)
   end
@@ -35,6 +37,21 @@ class BookmarkManager < Sinatra::Base
     erb :links
   end
 
+  get '/:title/update' do
+    session[:update] = params[:title]
+    erb(:update)
+  end
+
+  post '/links/update' do
+    p session[:update].inspect
+    link = Link.first(title: session[:update])
+    p link.inspect
+    tag = Tag.create(tag: params[:tag])
+    link.tags << tag
+    link.save
+    p link.tags.inspect
+    redirect '/links'
+  end
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
