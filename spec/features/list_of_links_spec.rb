@@ -21,13 +21,16 @@ feature "Bookmark Manager:" do
   end
 
   scenario "User can add a tag to stored links" do
-    visit('/')
-    click_button "Add Link"
-    fill_in :Title, with: "Google"
-    fill_in :URL, with: "www.google.com"
-    fill_in :Tag, with: "Search"
-    click_button "Add"
+    fill_form
     expect(page).to have_content "Google - www.google.com - Search"
+  end
+
+  scenario "User can filter links by tags" do
+   fill_form
+   fill_form_bubbles
+   visit('/tags/Bubbles')
+   expect(page).not_to have_content "Search"
+   expect(page).to have_content "Bubbles"
   end
 end
 
