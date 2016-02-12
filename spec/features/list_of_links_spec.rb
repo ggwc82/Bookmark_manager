@@ -32,5 +32,13 @@ feature "Bookmark Manager:" do
    expect(page).not_to have_content "Search"
    expect(page).to have_content "Bubbles"
   end
+
+  scenario "User can add multiple tags to links" do
+    fill_form
+    click_button("#Google")
+    fill_in 'Update', with: 'bananas'
+    click_button 'Submit'
+    expect(page).to have_content "Google - www.google.com - Search, bananas"
+  end
 end
 
